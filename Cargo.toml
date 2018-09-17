@@ -4,3 +4,11 @@ version = "0.1.0"
 authors = ["Alexandros <akatechis@gmail.com>"]
 
 [dependencies]
+
+[lib]
+name = "graphics"
+path = "src/lib.rs"
+
+[[bin]]
+name = "main"
+path = "src/bin/main.rs"

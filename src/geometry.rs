@@ -96,6 +96,15 @@ impl Mul<f64> for Vec2 {
   }
 }
 
+impl Mul<Vec2> for f64 {
+  type Output = Vec2;
+
+  fn mul (self, rhs: Vec2) -> Self::Output {
+    let [x, y] = rhs.0;
+    Vec2([x * self, y * self])
+  }
+}
+
 impl MulAssign<f64> for Vec2 {
   fn mul_assign(&mut self, rhs: f64) {
     self.0[0] *= rhs;

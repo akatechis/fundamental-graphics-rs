@@ -1,8 +1,5 @@
 use std::ops::{
-  Add, AddAssign,
-  Sub, SubAssign,
-  Mul, MulAssign,
-  Div, DivAssign
+  Add, AddAssign, Sub, SubAssign, Mul, MulAssign, Div, DivAssign, Neg
 };
 
 #[derive(Debug, PartialEq, Copy, Clone)]
@@ -98,6 +95,7 @@ impl MulAssign<f64> for Vec2 {
 
 impl Div<f64> for Vec2 {
   type Output = Vec2;
+
   fn div (self, rhs: f64) -> Self::Output {
     let [a_x, a_y] = self.0;
 
@@ -109,6 +107,16 @@ impl DivAssign<f64> for Vec2 {
   fn div_assign(&mut self, rhs: f64) {
     self.0[0] /= rhs;
     self.0[1] /= rhs;
+  }
+}
+
+impl Neg for Vec2 {
+  type Output = Vec2;
+
+  fn neg (self) -> Self::Output {
+    let [a_x, a_y] = self.0;
+
+    Vec2([-a_x, -a_y])
   }
 }
 
@@ -221,6 +229,12 @@ mod tests {
     let mut v4 = Vec2::new(15.5, -12.5);
     v4 /= -5.0;
     assert_eq!( Vec2::new(-3.1, 2.5), v4);
+  }
+
+  #[test]
+  fn test_vec2_unary_negation_operator () {
+    assert_eq!(Vec2::new(-2.0, -3.7), -Vec2::new(2.0, 3.7));
+    assert_eq!(Vec2::new(2.0, -3.7), -Vec2::new(-2.0, 3.7));
   }
 
   #[test]
